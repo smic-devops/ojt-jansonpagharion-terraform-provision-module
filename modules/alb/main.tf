@@ -1,7 +1,7 @@
 resource "aws_lb" "name" {
-  name               = var.name
-  internal           = var.internal
-  load_balancer_type = var.load_balancer_type
+  name               = var.alb_name
+  internal           = var.alb_internal
+  load_balancer_type = var.alb_load_balancer_type
   security_groups    = module.security.security_groups
   subnets            = module.vpc.public_subnet_ids
 
@@ -10,7 +10,7 @@ resource "aws_lb" "name" {
 }
 
 resource "aws_lb_target_group" "name" {
-  name        = var.name
+  name        = var.alb_target_group_name
   port        = var.port
   protocol    = var.protocol
   vpc_id      = module.vpc.vpc_id
