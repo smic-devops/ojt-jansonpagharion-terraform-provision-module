@@ -1,8 +1,8 @@
 ## ALB Security Group
 resource "aws_security_group" "sg_alb" {
-    name        = "alb-sg"
+    name        = "itss-ojt-pagharion-alb-security-group-module"
     description = "Security group for ALB"
-    vpc_id      = module.vpc.vpc_id
+    vpc_id      = var.vpc_id
 }
 
 resource "aws_vpc_security_group_ingress_rule" "http_alb" {
@@ -32,9 +32,9 @@ resource "aws_vpc_security_group_egress_rule" "alb_egress" {
 ## EC2 Security Group
 
 resource "aws_security_group" "sg_ec2" {
-    name        = "ec2-sg"
+    name        = "itss-ojt-pagharion-ec2-security-group-module"
     description = "Security group for EC2 instances"
-    vpc_id      = module.vpc.vpc_id
+    vpc_id      = var.vpc_id
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ec2_ingress" {

@@ -20,27 +20,27 @@ variable "enable_deletion_protection" {
   type        = bool
 }
 
-# Change, multiple ports
-variable "port" {
-  description = "The port on which the load balancer is listening"
-  type        = number
+## For listener and target group
+
+variable "listeners" {
+  description = "Map of ALB listeners to create."
+  type = map(object({
+    port              = number                 
+    protocol          = string                 
+    tg_port           = number                 
+    tg_protocol       = string                
+    tg_name           = string                 
+    target_type       = optional(string, "instance") 
+    health_path       = optional(string, "/")
+    health_port       = optional(string, "traffic-port")
+    health_protocol   = optional(string, "HTTP")
+
+    # Only for HTTPS listeners:
+    certificate_arn   = optional(string)
+    ssl_policy        = optional(string, "ELBSecurityPolicy-2016-08")
+  }))
 }
 
-variable "protocol" {
-  description = "The protocol on which the load balancer is listening"
-  type        = string
-}
-
-
-variable "target_type" {
-  description = "The target type of the load balancer"
-  type        = string
-}
-
-variable "alb_target_group_name" {
-  description = "The name of the target group for alb"
-  type = string
-}
 
 ##  VPC & Subnets
 
