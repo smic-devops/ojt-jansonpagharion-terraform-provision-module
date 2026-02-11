@@ -20,6 +20,11 @@ variable "enable_deletion_protection" {
   type        = bool
 }
 
+variable "alb_sg_id" {
+  description = "List of security group IDs to attach to the ALB."
+  type        = list(string)
+}
+
 ## For listener and target group
 
 variable "listeners" {
@@ -34,10 +39,6 @@ variable "listeners" {
     health_path       = optional(string, "/")
     health_port       = optional(string, "traffic-port")
     health_protocol   = optional(string, "HTTP")
-
-    # Only for HTTPS listeners:
-    certificate_arn   = optional(string)
-    ssl_policy        = optional(string, "ELBSecurityPolicy-2016-08")
   }))
 }
 

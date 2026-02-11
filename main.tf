@@ -1,0 +1,29 @@
+module "security" {
+  source      = "./modules/security"
+  vpc_id                     = var.vpc_id
+  sg_alb_name = var.sg_alb_name
+  sg_ec2_name = var.sg_ec2_name
+}
+
+module "alb" {
+  source                     = "./modules/alb"
+  alb_name                   = var.alb_name
+  vpc_id                     = var.vpc_id
+  public_subnet_ids          = var.public_subnet_ids
+  alb_sg_id                  = module.security.alb_sg_id
+  listeners                  = var.listeners
+  alb_internal               = false
+  alb_load_balancer_type     = "application"
+  enable_deletion_protection = true
+}
+
+
+module "ec2" {
+  source            = "./modules/ec2"
+  ec2_sg_id         = module.security.ec2_sg_id
+  vpc_id            = var.vpc_id
+  private_subnet_id = var.private_subnet
+  ec2_name          = "${var.app_name}-ec2-module"
+  ami               = var.ami
+  instance_type     = var.instance_type
+}

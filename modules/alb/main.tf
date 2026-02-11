@@ -1,8 +1,8 @@
-resource "aws_lb" "name" {
+resource "aws_lb" "alb_main" {
   name               = var.alb_name
   internal           = var.alb_internal
   load_balancer_type = var.alb_load_balancer_type
-  security_groups    = [var.alb_security_group_id]
+  security_groups    = var.alb_sg_id
   subnets            = [var.public_subnet1, var.public_subnet2]
 
   enable_deletion_protection = var.enable_deletion_protection
@@ -24,9 +24,6 @@ resource "aws_lb_target_group" "alb_tg" {
     matcher  = "200-399"
   }
 
-  tags = {
-    Name = "tg-${each.value.tg_name}"
-  }
 }
 
 resource "aws_lb_listener" "alb_listener" {
