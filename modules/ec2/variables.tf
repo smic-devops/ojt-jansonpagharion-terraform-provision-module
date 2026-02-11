@@ -24,3 +24,8 @@ variable "ec2_sg_id" {
   type = string
 }
 
+variable "private_subnet" {
+  description = "The ID of the private subnet"
+  type        = string
+}
+
