@@ -1,7 +1,7 @@
 resource "aws_instance" "ec2_ins" {
   ami           = var.ami
   instance_type = var.instance_type
-  security_groups = module.security.ec2_sg_id
+  security_groups = var.ec2_sg_id
   subnet_id     = module.vpc.private_subnet_ids[0]
 
   tags = {

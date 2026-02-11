@@ -9,12 +9,12 @@ module "alb" {
   source                     = "./modules/alb"
   alb_name                   = var.alb_name
   vpc_id                     = var.vpc_id
-  public_subnet_ids          = var.public_subnet_ids
-  alb_sg_id                  = module.security.alb_sg_id
+  public_subnet_ids          = local.public_subnet_ids
+  alb_sg_ids                 = var.alb_sg_ids
   listeners                  = var.listeners
-  alb_internal               = false
-  alb_load_balancer_type     = "application"
-  enable_deletion_protection = true
+  alb_internal               = var.alb_internal
+  alb_load_balancer_type     = var.alb_load_balancer_type
+  enable_deletion_protection = var.enable_deletion_protection
 }
 
 
@@ -26,4 +26,4 @@ module "ec2" {
   ec2_name          = "${var.app_name}-ec2-module"
   ami               = var.ami
   instance_type     = var.instance_type
-}
+} 
