@@ -27,19 +27,19 @@ variable "alb_sg_id" {
 
 ## For listener and target group
 
-variable "listeners" {
+variable "listener" {
   description = "Map of ALB listeners to create."
-  type = map(object({
-    port              = number                 
-    protocol          = string                 
-    tg_port           = number                 
-    tg_protocol       = string                
-    tg_name           = string                 
-    target_type       = optional(string, "instance") 
-    health_path       = optional(string, "/")
-    health_port       = optional(string, "traffic-port")
-    health_protocol   = optional(string, "HTTP")
-  }))
+  type = object({
+    port            = number
+    protocol        = string
+    tg_port         = number
+    tg_protocol     = string
+    tg_name         = string
+    target_type     = optional(string, "instance")
+    health_path     = optional(string, "/")
+    health_port     = optional(string, "traffic-port")
+    health_protocol = optional(string, "HTTP")
+  })
 }
 
 

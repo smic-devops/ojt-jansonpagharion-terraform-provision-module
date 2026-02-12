@@ -20,7 +20,7 @@ variable "vpc_id" {
 }
 
 
-variable "ec2_sg_id" { 
+variable "ec2_sg_id" {
   type = string
 }
 
@@ -29,3 +29,7 @@ variable "private_subnet" {
   type        = string
 }
 
+variable "target_group_arn" {
+  description = "ARN of the target group to attach instances to"
+  type        = string
+}
