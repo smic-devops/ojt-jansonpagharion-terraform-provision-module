@@ -27,6 +27,11 @@ variable "private_subnet" {
   type        = string
 }
 
+variable "private_subnet2" {
+  description = "The ID of the second private subnet"
+  type        = string
+}
+
 # ALB variables
 
 variable "alb_name" {
@@ -82,6 +87,11 @@ variable "sg_ec2_name" {
   type        = string
 }
 
+variable "sg_rds_name" {
+  description = "The name of the RDS security group"
+  type        = string
+}
+
 # EC2 variables
 
 variable "ami" {
@@ -92,4 +102,37 @@ variable "ami" {
 variable "instance_type" {
   description = "The instance type to use for the EC2 instance"
   type        = string
+}
+
+# RDS
+
+variable "db_engine" {
+  type        = string
+  description = "Database engine type (mysql or postgres)"
+}
+
+variable "db_engine_version" {
+  type        = string
+  description = "Engine version"
+}
+
+variable "db_instance_class" {
+  type        = string
+  description = "Instance size for RDS (db.t4g.micro recommended for dev)"
+}
+
+variable "db_name" {
+  type        = string
+  description = "Name of the initial database"
+}
+
+variable "db_username" {
+  type        = string
+  description = "Database master username"
+}
+
+variable "db_password" {
+  type        = string
+  sensitive   = true
+  description = "Master DB password (DO NOT hardcode for production)"
 }

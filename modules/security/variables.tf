@@ -12,3 +12,8 @@ variable "sg_ec2_name" {
   description = "The name of the EC2 security group"
   type        = string
 }
+
+variable "sg_rds_name" {
+  description = "The name of the RDS security group"
+  type        = string
+}

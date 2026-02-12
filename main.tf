@@ -3,6 +3,7 @@ module "security" {
   vpc_id      = var.vpc_id
   sg_alb_name = var.sg_alb_name
   sg_ec2_name = var.sg_ec2_name
+  sg_rds_name = var.sg_rds_name
 }
 
 module "alb" {
@@ -28,4 +29,19 @@ module "ec2" {
   ami              = var.ami
   instance_type    = var.instance_type
   target_group_arn = module.alb.alb_tg_arn
-} 
+}
+
+
+module "rds" {
+  source            = "./modules/rds"
+  private_subnet2   = var.private_subnet2
+  private_subnet    = var.private_subnet
+  subnet_group_name = "${var.app_name}-db-subnet-group"
+  rds_sg_id         = module.security.rds_sg_id
+  db_engine         = var.db_engine
+  db_engine_version = var.db_engine_version
+  db_instance_class = var.db_instance_class
+  db_name           = var.db_name
+  db_username       = var.db_username
+  db_password       = var.db_password
+}

@@ -51,3 +51,30 @@ resource "aws_vpc_security_group_egress_rule" "ec2_egress" {
   ip_protocol       = "-1"
 
 }
+
+# RDS Security Group
+
+resource "aws_security_group" "sg_rds" {
+  name        = var.sg_rds_name
+  description = "Allow DB from EC2 only"
+  vpc_id      = var.vpc_id
+}
+
+# MySQL (3306). Change to 5432 for PostgreSQL.
+resource "aws_security_group_rule" "rds_ingress_from_ec2" {
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.sg_rds.id
+  source_security_group_id = aws_security_group.sg_ec2.id
+}
+
+resource "aws_security_group_rule" "rds_egress_all" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.sg_rds.id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
