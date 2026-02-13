@@ -12,7 +12,7 @@ module "alb" {
   vpc_id                     = var.vpc_id
   public_subnet1             = var.public_subnet1
   public_subnet2             = var.public_subnet2
-  alb_sg_id                  = module.security.alb_sg_id
+  alb_sg_id                  = module.security.sg_alb.id
   listener                   = var.listener
   alb_internal               = var.alb_internal
   alb_load_balancer_type     = var.alb_load_balancer_type

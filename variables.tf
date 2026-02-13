@@ -63,7 +63,7 @@ variable "enable_deletion_protection" {
 
 variable "listener" {
   description = "ALB listener configuration."
-  type = object({
+  type = map(object({
     port            = number                       # e.g., 80 or 443
     protocol        = string                       # "HTTP" or "HTTPS"
     tg_port         = number                       # target group port (often 80)
@@ -76,7 +76,7 @@ variable "listener" {
     # Only for HTTPS listeners:
     certificate_arn = optional(string)
     ssl_policy      = optional(string, "ELBSecurityPolicy-2016-08")
-  })
+  }))
   default = {
     port        = 80
     protocol    = "HTTP"
