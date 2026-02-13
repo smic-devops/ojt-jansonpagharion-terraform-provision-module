@@ -82,7 +82,7 @@ variable "listener" {
       protocol    = "HTTP"
       tg_port     = 80
       tg_protocol = "HTTP"
-      tg_name     = "itss-ojt-pagharion-alb-target-group-module"
+      tg_name     = "itss-ojt-pagharion-alb-tg-module"
     }
   }
 }
@@ -93,32 +93,30 @@ variable "listener" {
 variable "sg_alb_name" {
   description = "The name of the ALB security group"
   type        = string
-  default     = "itss-ojt-pagharion-alb-security-group-module"
+  default     = "itss-ojt-pagharion-alb-sg-module"
 }
 
 variable "sg_ec2_name" {
   description = "The name of the EC2 security group"
   type        = string
-  default     = "itss-ojt-pagharion-ec2-security-group-module"
+  default     = "itss-ojt-pagharion-ec2-sg-module"
 }
 
 variable "sg_rds_name" {
   description = "The name of the RDS security group"
   type        = string
-  default     = "itss-ojt-pagharion-rds-security-group-module"
+  default     = "itss-ojt-pagharion-rds-sg-module"
 }
 
 # EC2 variables
 variable "ami" {
-  description = "The AMI ID to use for the EC2 instance"
-  type        = string
-  default     = "value" # TODO: replace with real AMI ID
+  type    = string
+  default = "ami-0249e9b9816d90e03"
 }
 
 variable "instance_type" {
-  description = "The instance type to use for the EC2 instance"
-  type        = string
-  default     = "value" # TODO: e.g., "t3.micro"
+  type    = string
+  default = "t3.micro"
 }
 
 # RDS
