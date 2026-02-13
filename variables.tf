@@ -61,31 +61,33 @@ variable "enable_deletion_protection" {
   default     = true
 }
 
+
+
 variable "listener" {
-  description = "ALB listener configuration."
+  description = "Map of ALB listeners to create, keyed by name (e.g., http_80, https_443)."
   type = map(object({
-    port            = number                       # e.g., 80 or 443
-    protocol        = string                       # "HTTP" or "HTTPS"
-    tg_port         = number                       # target group port (often 80)
-    tg_protocol     = string                       # "HTTP" or "HTTPS"
-    tg_name         = string                       # TG name (must be unique & <= 32 chars)
-    target_type     = optional(string, "instance") # or "ip", "lambda"
+    port            = number
+    protocol        = string
+    tg_port         = number
+    tg_protocol     = string
+    tg_name         = string
+    target_type     = optional(string, "instance")
     health_path     = optional(string, "/")
     health_port     = optional(string, "traffic-port")
     health_protocol = optional(string, "HTTP")
-    # Only for HTTPS listeners:
-    certificate_arn = optional(string)
-    ssl_policy      = optional(string, "ELBSecurityPolicy-2016-08")
   }))
   default = {
-    port        = 80
-    protocol    = "HTTP"
-    tg_port     = 80
-    tg_protocol = "HTTP"
-    tg_name     = "itss-ojt-pagharion-alb-target-group-module"
-    # others use defaults
+    http_80 = {
+      port        = 80
+      protocol    = "HTTP"
+      tg_port     = 80
+      tg_protocol = "HTTP"
+      tg_name     = "itss-ojt-pagharion-alb-target-group-module"
+    }
   }
 }
+
+
 
 # Security Group variables
 variable "sg_alb_name" {

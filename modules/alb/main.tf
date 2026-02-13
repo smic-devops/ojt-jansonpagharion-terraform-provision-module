@@ -9,31 +9,33 @@ resource "aws_lb" "alb_main" {
 }
 
 resource "aws_lb_target_group" "alb_tg" {
-  name        = var.listener.tg_name
-  port        = var.listener.tg_port
-  protocol    = var.listener.tg_protocol
+  for_each = var.listener
+
+  name        = each.value.tg_name
+  port        = each.value.tg_port
+  protocol    = each.value.tg_protocol
+  target_type = try(each.value.target_type, "instance")
   vpc_id      = var.vpc_id
-  target_type = var.listener.target_type
+
 
   health_check {
-    path     = var.listener.health_path
-    port     = var.listener.health_port
-    protocol = var.listener.health_protocol
-    matcher  = "200-399"
+    path     = try(each.value.health_path, "/")
+    port     = try(each.value.health_port, "traffic-port")
+    protocol = try(each.value.health_protocol, "HTTP")
   }
 
 }
 
 resource "aws_lb_listener" "alb_listener" {
-  load_balancer_arn = aws_lb.alb_main.arn
-  port              = var.listener.port
-  protocol          = var.listener.protocol
+  for_each          = var.listener
 
-  certificate_arn = try(var.listener.certificate_arn, null)
-  ssl_policy      = try(var.listener.ssl_policy, null)
+  load_balancer_arn = aws_lb.alb_main.arn
+  port              = each.value.port
+  protocol          = each.value.protocol
+
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.alb_tg.arn
+    target_group_arn = aws_lb_target_group.alb_tg[each.key].arn
   }
 }

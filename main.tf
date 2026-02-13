@@ -12,7 +12,7 @@ module "alb" {
   vpc_id                     = var.vpc_id
   public_subnet1             = var.public_subnet1
   public_subnet2             = var.public_subnet2
-  alb_sg_id                  = module.security.sg_alb.id
+  alb_sg_id                  = module.security.alb_sg_id
   listener                   = var.listener
   alb_internal               = var.alb_internal
   alb_load_balancer_type     = var.alb_load_balancer_type
@@ -28,7 +28,7 @@ module "ec2" {
   ec2_name         = "${var.app_name}-ec2-module"
   ami              = var.ami
   instance_type    = var.instance_type
-  target_group_arn = module.alb.alb_tg_arn
+  target_group_arn = module.alb.target_group_arns["http_80"]
 }
 
 
