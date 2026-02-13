@@ -22,7 +22,7 @@ variable "enable_deletion_protection" {
 
 variable "alb_sg_id" {
   description = "List of security group IDs to attach to the ALB."
-  type        = list(string)
+  type        = string
 }
 
 ## For listener and target group
