@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "alb_tg" {
 }
 
 resource "aws_lb_listener" "alb_listener" {
-  for_each          = var.listener
+  for_each = var.listener
 
   load_balancer_arn = aws_lb.alb_main.arn
   port              = each.value.port
