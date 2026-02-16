@@ -33,8 +33,4 @@ resource "aws_db_instance" "rds_db_instance" {
   deletion_protection     = true
   skip_final_snapshot     = false
   apply_immediately       = false
-
-  # Optionals
-  performance_insights_enabled          = true
-  performance_insights_retention_period = 7
 }
