@@ -46,10 +46,12 @@ resource "aws_vpc_security_group_ingress_rule" "ec2_ingress" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "ec2_egress" {
-  security_group_id = aws_security_group.sg_ec2.id
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1"
-
+  security_group_id            = aws_security_group.sg_ec2.id
+  referenced_security_group_id = aws_security_group.sg_rds.id
+  description                  = "Allow EC2 to talk to RDS"
+  from_port                    = 3306
+  to_port                      = 3306
+  ip_protocol                  = "tcp"
 }
 
 # RDS Security Group
@@ -60,7 +62,6 @@ resource "aws_security_group" "sg_rds" {
   vpc_id      = var.vpc_id
 }
 
-# MySQL (3306). Change to 5432 for PostgreSQL.
 resource "aws_security_group_rule" "rds_ingress_from_ec2" {
   type                     = "ingress"
   from_port                = 3306

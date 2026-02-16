@@ -23,10 +23,8 @@ resource "aws_db_instance" "rds_db_instance" {
   vpc_security_group_ids = [var.rds_sg_id]
   publicly_accessible    = false
 
-  # Good defaults; tweak per environment
-  multi_az                = false # true for prod HA (needs Multi-AZ pricing)
-  backup_retention_period = 7
-  deletion_protection     = true
-  skip_final_snapshot     = false
-  apply_immediately       = false
+  multi_az            = false
+  deletion_protection = true
+  skip_final_snapshot = false
+  apply_immediately   = false
 }
