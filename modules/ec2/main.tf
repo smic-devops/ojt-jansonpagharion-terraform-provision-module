@@ -5,7 +5,7 @@ resource "aws_instance" "ec2_ins" {
   subnet_id       = var.private_subnet
 
   tags = {
-    Name = "${var.ec2_name}-instance-module"
+    Name = "${var.ec2_name}"
   }
 
 }
