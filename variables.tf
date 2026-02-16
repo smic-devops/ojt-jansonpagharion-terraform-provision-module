@@ -37,11 +37,7 @@ variable "private_subnet2" {
 }
 
 # ALB variables
-variable "alb_name" {
-  description = "The name of the load balancer"
-  type        = string
-  default     = "itss-ojt-pagharion-alb-module"
-}
+
 
 variable "alb_internal" {
   description = "Whether the load balancer is internal or external"
@@ -90,23 +86,7 @@ variable "listener" {
 
 
 # Security Group variables
-variable "sg_alb_name" {
-  description = "The name of the ALB security group"
-  type        = string
-  default     = "itss-ojt-pagharion-alb-sg-module"
-}
 
-variable "sg_ec2_name" {
-  description = "The name of the EC2 security group"
-  type        = string
-  default     = "itss-ojt-pagharion-ec2-sg-module"
-}
-
-variable "sg_rds_name" {
-  description = "The name of the RDS security group"
-  type        = string
-  default     = "itss-ojt-pagharion-rds-sg-module"
-}
 
 # EC2 variables
 variable "ami" {
@@ -138,21 +118,15 @@ variable "db_instance_class" {
   default     = "db.t4g.micro"
 }
 
-variable "db_name" {
-  type        = string
-  description = "Name of the initial database"
-  default     = "appdb"
-}
-
 variable "db_username" {
   type        = string
   description = "Database master username"
-  default     = "appuser"
+  default     = "root"
 }
 
 variable "db_password" {
   type        = string
   sensitive   = true
   description = "Master DB password"
-  default     = "example-password"
+  default     = "root"
 }
