@@ -128,7 +128,7 @@ variable "db_password" {
   type        = string
   sensitive   = true
   description = "Master DB password"
-  default     = "root"
+  default     = "jpagharion123"
 }
 
 variable "db_name" {
