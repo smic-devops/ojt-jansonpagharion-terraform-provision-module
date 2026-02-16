@@ -134,5 +134,5 @@ variable "db_password" {
 variable "db_name" {
   type        = string
   description = "Name of the initial database"
-  default = "itssojtpaghariondbinstance"
+  default     = "itssojtpaghariondbinstance"
 }
