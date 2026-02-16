@@ -36,12 +36,12 @@ module "rds" {
   source            = "./modules/rds"
   private_subnet2   = var.private_subnet2
   private_subnet    = var.private_subnet
-  subnet_group_name = "${var.app_name}-db-subnet-group-module"
+  subnet_group_name = "${var.app_name}subnet-group-module"
   rds_sg_id         = module.security.rds_sg_id
   db_engine         = var.db_engine
   db_engine_version = var.db_engine_version
   db_instance_class = var.db_instance_class
-  db_name           = "${var.app_name}-db-module"
+  db_name           = var.db_name
   db_username       = var.db_username
   db_password       = var.db_password
 }

@@ -130,3 +130,9 @@ variable "db_password" {
   description = "Master DB password"
   default     = "root"
 }
+
+variable "db_name" {
+  type        = string
+  description = "Name of the initial database"
+  default = "itssojtpaghariondbinstance"
+}
