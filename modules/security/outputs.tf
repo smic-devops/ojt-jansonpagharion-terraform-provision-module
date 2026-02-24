@@ -8,8 +8,7 @@ output "alb_sg_id" {
   value       = aws_security_group.sg_alb.id
 }
 
-output "rds_sg_id" {
+output "sg_rds" {
   description = "Security group ID for RDS"
   value       = aws_security_group.sg_rds.id
-
 }
