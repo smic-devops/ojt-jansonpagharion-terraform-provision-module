@@ -37,7 +37,7 @@ module "rds" {
   private_subnet2   = var.private_subnet2
   private_subnet    = var.private_subnet
   subnet_group_name = var.app_name
-  rds_sg_id         = module.security.rds_sg_id
+  rds_sg_id         = module.security.sg_rds
   db_engine         = var.db_engine
   db_engine_version = var.db_engine_version
   db_instance_class = var.db_instance_class
