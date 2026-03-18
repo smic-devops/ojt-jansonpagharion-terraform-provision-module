@@ -23,9 +23,9 @@ resource "aws_db_instance" "rds_db_instance" {
   vpc_security_group_ids = [var.rds_sg_id]
   publicly_accessible    = false
 
-  multi_az            = false
-  deletion_protection = true
-  skip_final_snapshot = false
-  apply_immediately   = false
+  multi_az                  = false
+  deletion_protection       = true
+  skip_final_snapshot       = false
+  apply_immediately         = false
   final_snapshot_identifier = "jansonpagharion-rds-final-snapshot"
 }
