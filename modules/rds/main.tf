@@ -24,7 +24,7 @@ resource "aws_db_instance" "rds_db_instance" {
   publicly_accessible    = false
 
   multi_az                  = false
-  deletion_protection       = true
+  deletion_protection       = false
   skip_final_snapshot       = false
   apply_immediately         = false
   final_snapshot_identifier = "jansonpagharion-rds-final-snapshot"
